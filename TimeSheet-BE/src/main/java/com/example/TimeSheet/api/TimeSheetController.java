@@ -1,15 +1,13 @@
 package com.example.TimeSheet.api;
-
 import com.example.TimeSheet.model.TimeSheet;
 import com.example.TimeSheet.service.TimeSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("api/v1/timesheet")
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class TimeSheetController {
     private final TimeSheetService timeSheetService;
 

@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/status")
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class StatusController {
     private final StatusService statusService;
 

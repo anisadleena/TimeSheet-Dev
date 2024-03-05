@@ -1,16 +1,13 @@
 package com.example.TimeSheet.service;
 
 import com.example.TimeSheet.dao.StatusDao;
-import com.example.TimeSheet.dao.timeSheetDao;
 import com.example.TimeSheet.model.Status;
-import com.example.TimeSheet.model.TimeSheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class StatusService {
