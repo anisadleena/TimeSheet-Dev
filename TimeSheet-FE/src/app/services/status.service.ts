@@ -1,0 +1,40 @@
+// status.service.ts
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, ReplaySubject } from 'rxjs';
+import { Status } from './timesheet.type';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StatusService {
+  private baseUrl = 'http://localhost:8080/api/v1/status';
+
+  private _status: ReplaySubject<Status[]> = new ReplaySubject<Status[]>(1)
+
+  constructor(private http: HttpClient) { }
+
+    //   ============================
+    //   setter and getter for status 
+    //   ============================
+    set status(value: Status[]){
+        this._status.next(value);
+    }
+
+    get status$(): Observable<Status[]>{
+        return this._status.asObservable();
+    }
+
+  getAllStatus(): Observable<Status[]> {
+    return this.http.get<Status[]>(this.baseUrl);
+  }
+
+  getStatusById(statusId: number): Observable<Status> {
+    return this.http.get<Status>(`${this.baseUrl}/${statusId}`);
+  }
+
+  addStatus(status: Status): Observable<any> {
+    return this.http.post<any>(this.baseUrl, status);
+  }
+}

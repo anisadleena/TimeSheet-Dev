@@ -1,0 +1,57 @@
+<div class="flex flex-col w-full h-full p-5">
+    <mat-label class="text-black mr-5 text-lg font-bold">Time Sheet Entry</mat-label>
+    <div class="flex flex-col w-full h-full text-left p-5">
+        <!-- project name and task name -->
+        <div class="flex flex-col ">
+            <mat-form-field class="w-full m-2" appearance="fill">
+                <mat-label>Project Name</mat-label>
+                <input matInput placeholder="Enter Project Name">
+                <mat-icon class="text-blue-700" matSuffix>border_color</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="w-full m-2" appearance="fill">
+                <mat-label>Task Name </mat-label>
+                <input matInput placeholder="Enter Task Name">
+                <mat-icon class="text-blue-700"  matSuffix>border_color</mat-icon>
+            </mat-form-field>
+        </div>
+        <!-- end date and start date -->
+        <div class="flex flex-row">
+            <div class="w-full p-5">
+                <mat-label class="text-black font-semibold">End Date </mat-label>
+                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" [(ngModel)]="selectedDate">
+            </div> 
+            <div class="w-full p-5">
+                <mat-label class="text-black font-semibold">Start Date </mat-label>
+                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" [(ngModel)]="selectedDate">
+            </div> 
+        </div>
+        <!-- Status and Assigned -->
+        <div class="flex flex-row">
+            <div class="w-full p-5">
+                <mat-form-field class="w-full">
+                    <mat-label>Status</mat-label>
+                    <select matNativeControl required [(ngModel)]="selectedStatusId">
+                        <option *ngFor="let status of dummyStatus" [value]="status.status_id">{{ status.status_name }}</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="w-full p-5">
+                <mat-form-field class="w-full">
+                    <mat-label>Assign To</mat-label>
+                    <select matNativeControl required [(ngModel)]="selectedUserId">
+                      <option *ngFor="let user of dummyUser" [value]="user.user_id">{{ user.username }}</option>
+                    </select>
+                </mat-form-field>  
+            </div>
+        </div>
+        <!-- button save & close -->
+        <div class="flex flex-row justify-center">
+            <button class="bg-blue-500 hover:bg-blue-900 text-white py-1 px-6 rounded-sm m-2">
+                Save
+            </button>
+            <button class="bg-blue-500 hover:bg-blue-900 text-white py-1 px-6 rounded-sm m-2" (click)="close()">
+                Close
+            </button>
+        </div> 
+    </div>
+</div>
