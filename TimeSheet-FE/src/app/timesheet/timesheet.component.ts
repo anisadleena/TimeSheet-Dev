@@ -75,38 +75,7 @@ export class TimeSheetComponent {
       }
     
       ngOnInit() {
-        this._statusService.getAllStatus().subscribe(
-          (response)=> {
-            console.log("response status:", response);
-            
-          },
-          (error)=>{
-            console.log(error);
-            
-          }
-        )
-
-        this._timesheetService.getAllTimeSheets().subscribe(
-          (response)=> {
-            console.log("response timesheet:", response);
-            
-          },
-          (error)=>{
-            console.log(error);
-            
-          }
-        )
-
-        this._userService.getAllUsers().subscribe(
-          (response)=> {
-            console.log("response user:", response);
-            
-          },
-          (error)=>{
-            console.log(error);
-            
-          }
-        )
+       
       }
     
       search(): void {

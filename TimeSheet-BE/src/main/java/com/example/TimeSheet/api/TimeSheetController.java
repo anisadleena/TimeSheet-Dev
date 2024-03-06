@@ -16,27 +16,27 @@ public class TimeSheetController {
         this.timeSheetService = timeSheetService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void addTimeSheet(@RequestBody TimeSheet timeSheet){
         timeSheetService.addTimeSheet(timeSheet);
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public List<TimeSheet> getAllTimeSheet(){
         return timeSheetService.getAllTimeSheet();
     }
 
-    @GetMapping(path="{id}")
+    @GetMapping("/get/{Id}")
     public TimeSheet getTimeSheetById(@PathVariable("id") int id){
         return timeSheetService.getTimeSheetById(id).orElse(null);
     }
 
-    @DeleteMapping(path="{id}")
+    @DeleteMapping("/delete/{Id}")
     public void deleteTimeSheetById(@PathVariable("id") int id){
         timeSheetService.deleteTimeSheet(id);
     }
 
-    @PutMapping(path="{id}")
+    @PutMapping("/update/{Id}")
     public void updateTimeSheet(@PathVariable("id") int id, @RequestBody TimeSheet TimeSheetToUpdate){
         timeSheetService.updateTimeSheet(id, TimeSheetToUpdate);
     }

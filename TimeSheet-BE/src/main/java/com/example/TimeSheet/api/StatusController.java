@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("api/v1/status")
 @RestController
@@ -19,18 +18,18 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void addStatus(@RequestBody Status status){
         statusService.addStatus(status);
     }
 
-    @GetMapping
+    @GetMapping("/delete/{status_id}")
     public List<Status> getAllStatus(){
         System.out.println("tubikk : " + statusService.getAllStatus());
         return statusService.getAllStatus();
     }
 
-    @GetMapping(path="{status_id}")
+    @GetMapping("/get/{status_id}")
     public Status getStatusById(@PathVariable("status_id") Integer status_id){
         return statusService.getStatusById(status_id).orElse(null);
     }

@@ -7,32 +7,27 @@ import { TimeSheet } from './timesheet.type';
   providedIn: 'root'
 })
 export class TimeSheetService {
-  private apiUrl = 'http://localhost:8080/api/v1/timesheet'; // Update URL accordingly
+  private apiUrl = 'http://localhost:8080/api/1.0/timesheet'; // Update URL accordingly
 
   constructor(private http: HttpClient) { }
 
   // Add a new TimeSheet
   addTimeSheet(timeSheet: TimeSheet): Observable<any> {
-    return this.http.post<any>(this.apiUrl, timeSheet);
+    return this.http.post<any>(`${this.apiUrl}/create`, timeSheet);
   }
 
-  // Get all TimeSheets
-  getAllTimeSheets(): Observable<TimeSheet[]> {
-    return this.http.get<TimeSheet[]>(this.apiUrl);
-  }
-
-  // Get TimeSheet by ID
-  getTimeSheetById(id: number): Observable<TimeSheet> {
-    return this.http.get<TimeSheet>(`${this.apiUrl}/${id}`);
-  }
+  // // Get all TimeSheets
+  // getAllTimeSheets(): Observable<TimeSheet[]> {
+  //   return this.http.get<TimeSheet[]>(this.apiUrl);
+  // }
 
   // Update TimeSheet
   updateTimeSheet(id: number, timeSheet: TimeSheet): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, timeSheet);
+    return this.http.put<any>(`${this.apiUrl}/delete/${id}`, timeSheet);
   }
 
   // Delete TimeSheet by ID
   deleteTimeSheet(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/edit/${id}`);
   }
 }

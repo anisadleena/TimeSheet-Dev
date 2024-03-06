@@ -18,17 +18,17 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void addUser(@RequestBody User user){
         userService.addUser(user);
     }
 
-    @GetMapping
+    @GetMapping("/delete/{user_id}")
     public List<User> getAllUser(){
         return userService.getAllUser();
     }
 
-    @GetMapping(path="{user_id}")
+    @GetMapping("/get/{user_id}")
     public User getUserById(@PathVariable("user_id") Integer user_id){
         return userService.getUserById(user_id).orElse(null);
     }
