@@ -7,22 +7,13 @@ import { User } from './timesheet.type';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/v1/user'; // Update URL accordingly
+  private apiUrl = 'http://localhost:8080/api/v1/user';
 
   constructor(private http: HttpClient) { }
 
-  // Add a new User
-  addUser(user: User): Observable<any> {
-    return this.http.post<any>(this.apiUrl, user);
-  }
-
   // Get all Users
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    return this.http.get<User[]>(`${this.apiUrl}/get/All`);
   }
 
-  // Get User by ID
-  getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${userId}`);
-  }
 }

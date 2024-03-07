@@ -15,26 +15,7 @@ export class StatusService {
 
   constructor(private http: HttpClient) { }
 
-    //   ============================
-    //   setter and getter for status 
-    //   ============================
-    set status(value: Status[]){
-        this._status.next(value);
-    }
-
-    get status$(): Observable<Status[]>{
-        return this._status.asObservable();
-    }
-
   getAllStatus(): Observable<Status[]> {
-    return this.http.get<Status[]>(this.baseUrl);
-  }
-
-  getStatusById(statusId: number): Observable<Status> {
-    return this.http.get<Status>(`${this.baseUrl}/${statusId}`);
-  }
-
-  addStatus(status: Status): Observable<any> {
-    return this.http.post<any>(this.baseUrl, status);
+    return this.http.get<Status[]>(`${this.baseUrl}/get/All`);
   }
 }
