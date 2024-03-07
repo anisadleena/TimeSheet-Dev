@@ -1,49 +1,49 @@
 <div class="flex flex-col w-full h-full p-5">
     <mat-label class="text-black mr-5 text-lg font-bold">Update Time Sheet</mat-label>
-    <div class="flex flex-col w-full h-full text-left p-5">
-        <!-- project name and task name -->
-        <!-- <div class="flex flex-col ">
+    <div class="flex flex-col w-full h-full text-left p-5" [formGroup]="editForm">
+        <!-- project name and task description -->
+        <div class="flex flex-col ">
             <mat-form-field class="w-full m-2" appearance="fill">
                 <mat-label>Project Name</mat-label>
-                <input matInput placeholder="Enter Project Name">
+                <input matInput formControlName="project">
                 <mat-icon class="text-blue-700" matSuffix>border_color</mat-icon>
             </mat-form-field>
             <mat-form-field class="w-full m-2" appearance="fill">
-                <mat-label>Task Name </mat-label>
-                <input matInput placeholder="Enter Task Name">
+                <mat-label>Task Description </mat-label>
+                <input matInput formControlName="taskDescription">
                 <mat-icon class="text-blue-700"  matSuffix>border_color</mat-icon>
             </mat-form-field>
-        </div> -->
+        </div>
         <!-- end date and start date -->
-        <!-- <div class="flex flex-row">
-            <div class="w-full p-5">
-                <mat-label class="text-black font-semibold">End Date </mat-label>
-                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" [(ngModel)]="selectedDate">
-            </div> 
+        <div class="flex flex-row">
             <div class="w-full p-5">
                 <mat-label class="text-black font-semibold">Start Date </mat-label>
-                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" [(ngModel)]="selectedDate">
+                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" formControlName="startDate">
             </div> 
-        </div> -->
+            <div class="w-full p-5">
+                <mat-label class="text-black font-semibold">End Date </mat-label>
+                <input class="text-black w-full h-full border-2 border-black-600 rounded-lg p-2" mat-input type="date" formControlName="endDate">
+            </div> 
+        </div>
         <!-- Status and Assigned -->
-        <!-- <div class="flex flex-row">
+        <div class="flex flex-row">
             <div class="w-full p-5">
                 <mat-form-field class="w-full">
                     <mat-label>Status</mat-label>
-                    <select matNativeControl required [(ngModel)]="selectedStatusId">
-                        <option *ngFor="let status of dummyStatus" [value]="status.status_id">{{ status.status_name }}</option>
+                    <select matNativeControl required formControlName="statusId">
+                        <option *ngFor="let status of status" [value]="status.id">{{ status.statusName }}</option>
                     </select>
                 </mat-form-field>
             </div>
             <div class="w-full p-5">
                 <mat-form-field class="w-full">
                     <mat-label>Assign To</mat-label>
-                    <select matNativeControl required [(ngModel)]="selectedUserId">
-                      <option *ngFor="let user of dummyUser" [value]="user.user_id">{{ user.username }}</option>
+                    <select matNativeControl required formControlName="userId">
+                      <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
                     </select>
                 </mat-form-field>  
             </div>
-        </div> -->
+        </div>
         <!-- button save & close -->
         <!-- <div class="flex flex-row justify-center">
             <button class="bg-blue-500 hover:bg-blue-900 text-white py-1 px-6 rounded-sm m-2">
@@ -53,5 +53,11 @@
                 Close
             </button>
         </div>  -->
+    </div>
+    <div class="flex flex-col  items-end">
+        <button class="bg-blue-500 hover:bg-blue-900 text-white py-1 px-6 rounded-sm m-2 text-center w-26 flex flex-row" (click)="save()">
+            Save
+            <!-- <mat-icon class="text-white text-sm">add</mat-icon> -->
+        </button>
     </div>
 </div>

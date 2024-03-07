@@ -94,7 +94,7 @@ export class TimeSheetComponent implements OnInit {
 
     // Set up custom filterPredicate
     this.listTimeSheet.filterPredicate = (data: TimeSheet, filter: string) => {
-      const searchData = `${data.project} ${data.task_description}`.toLowerCase();
+      const searchData = `${data.project} ${data.taskDescription}`.toLowerCase();
       return searchData.includes(filter);
     };
   }
