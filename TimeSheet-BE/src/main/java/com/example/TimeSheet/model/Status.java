@@ -19,16 +19,4 @@ public class Status {
 
     @Column(name="status_name")
     private String statusName;
-
-//    public Status(@JsonProperty("status_id") Integer status_id, @JsonProperty("statusName") String statusName){
-//        this.id = id;
-//        this.statusName = statusName;
-//    }
-//    public Integer getStatusId(){
-//        return id;
-//    }
-//
-//    public String getStatus(){
-//        return statusName;
-//    }
 }
