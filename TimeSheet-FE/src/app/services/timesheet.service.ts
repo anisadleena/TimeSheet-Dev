@@ -22,12 +22,12 @@ export class TimeSheetService {
   }
 
   // Update TimeSheet
-  updateTimeSheet(id: number, timeSheet: TimeSheet): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/edit/${id}`, timeSheet);
+  updateTimeSheet(id: string, timeSheet: TimeSheet): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/update/${id}`, timeSheet);
   }
 
   // Delete TimeSheet by ID
-  deleteTimeSheet(id: number): Observable<any> {
+  deleteTimeSheet(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
   }
 }

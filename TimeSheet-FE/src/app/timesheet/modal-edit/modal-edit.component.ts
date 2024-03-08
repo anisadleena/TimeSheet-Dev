@@ -11,6 +11,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { StatusService } from "src/app/services/status.service";
+import { TimeSheetService } from "src/app/services/timesheet.service";
 import { Status, TimeSheet, User } from "src/app/services/timesheet.type";
 import { UserService } from "src/app/services/user.service";
 
@@ -32,6 +33,7 @@ export class ModalEditComponent{
     private fb: FormBuilder,
     public _dialogRef: MatDialogRef<ModalEditComponent>,
     public _statusService: StatusService,
+    public _timesheetService: TimeSheetService,
     public _userService: UserService
     ) { 
   
@@ -39,7 +41,6 @@ export class ModalEditComponent{
   }
  
   ngOnInit() {
-    console.log("dataa == ", this.data);
     this.editForm = this.fb.group({
       project: [this.data.project || '', Validators.required],
       taskDescription: [this.data.taskDescription || '', Validators.required],
@@ -81,8 +82,8 @@ export class ModalEditComponent{
   }
 
   save(): void {
-    const body: TimeSheet = {
-      id: this.data.id,
+    const body = {
+      id: '',
       userId: this.editForm.get('userId')?.value,
       statusId: this.editForm.get('statusId')?.value,
       taskDescription: this.editForm.get('taskDescription')?.value,
@@ -91,7 +92,10 @@ export class ModalEditComponent{
       project: this.editForm.get('project')?.value,
     }
 
-    console.log("body :", body);
+    this._timesheetService.updateTimeSheet(this.data.id, body).subscribe((response) =>{
+      console.log("response : ", response);
+      this._dialogRef.close();
+    });
   }
 
   // private formatDate(date: DateTime) : string {

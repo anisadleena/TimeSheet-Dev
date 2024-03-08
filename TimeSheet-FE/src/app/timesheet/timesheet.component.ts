@@ -53,7 +53,6 @@ export class TimeSheetComponent implements OnInit {
     this._statusService.getAllStatus().subscribe(
       (status: Status[]) => {
         this.status = status;
-        console.log(this.status);
       },
       (error) => {
         console.error('Error fetching statuses:', error);
@@ -62,12 +61,9 @@ export class TimeSheetComponent implements OnInit {
   }
 
   getAllTimeSheets(): void {
-    console.log("this.listTimeSheet : ", this.listTimeSheet);
-    
     this._timesheetService.getAllTimeSheets().subscribe(
       (listTimeSheet: TimeSheet[]) => {
         this.listTimeSheet.data = listTimeSheet;
-        console.log(listTimeSheet);
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -79,7 +75,6 @@ export class TimeSheetComponent implements OnInit {
     this._userService.getAllUsers().subscribe(
       (user: User[]) => {
         this.user = user;
-        console.log(this.user);
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -108,21 +103,27 @@ export class TimeSheetComponent implements OnInit {
   }
 
   edit(id : string): void {
-    console.log("edit id :", id);
     const selectedTimeSheet = this.listTimeSheet.data.find(timesheet => timesheet.id === id);
-    console.log("selectedTimeSheet == ", selectedTimeSheet);
-    console.log("this.listTimeSheet.data == ", this.listTimeSheet.data);
-    
-    
     const dialogRef = this.dialog.open(ModalEditComponent, {
       width: '100%',
       disableClose: false,
       panelClass: 'info',
       data: selectedTimeSheet
     });
+
+    // ==========================================
+    // automatically refresh from backend 
+    // after close modal 
+    // ==========================================
+    dialogRef.afterClosed().subscribe(()=>{
+      this._timesheetService.getAllTimeSheets().subscribe();
+    })
   }
 
   delete(id : string): void {
-    console.log("delete id :", id);
+    this._timesheetService.deleteTimeSheet(id).subscribe((response) =>{
+      console.log("response => ", response);
+      
+    });
   }
 }
