@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,29 +17,32 @@ import { TimeSheetService } from '../services/timesheet.service';
 import { UserService } from '../services/user.service';
 import { Status, TimeSheet, User } from '../services/timesheet.type';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
-
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
   
 
 @Component({
   selector: 'timesheet',
   templateUrl: 'timesheet.component.html',
   standalone: true,
-  imports: [MatIconModule, MatFormFieldModule, FormsModule, MatInputModule,CommonModule, MatButtonModule, MatTableModule, MatDialogModule,MatTooltipModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule],
+  imports: [MatIconModule, MatFormFieldModule, FormsModule, MatInputModule,CommonModule, MatButtonModule, MatTableModule, MatDialogModule,MatTooltipModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule, MatPaginatorModule],
 })
 export class TimeSheetComponent implements OnInit {
   searchTerm: string = '';
   filterGlobalSearchControl: FormControl = new FormControl();
   displayedColumns: string[] = ['project', 'task', 'assignedto', 'from', 'to', 'status', 'operation'];
   status: Status[] = [];
-  listTimeSheet: MatTableDataSource<any> = new MatTableDataSource();
-  user: User[] = [];
+ 
+  users: User[] = [];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  listTimeSheet: MatTableDataSource<any>;
   constructor(
     public dialog: MatDialog,
     public _statusService: StatusService,
     public _timesheetService: TimeSheetService,
     public _userService: UserService
   ) {
+    this.listTimeSheet = new MatTableDataSource<any>();
   }
 
   ngOnInit() {
@@ -48,6 +51,11 @@ export class TimeSheetComponent implements OnInit {
     this.getAllUsers();
     this.search();
   }
+
+  ngAfterViewInit() {
+    // Assuming your data is fetched and assigned to listTimeSheet
+    this.listTimeSheet.paginator = this.paginator;
+}
 
   getAllStatus(): void {
     this._statusService.getAllStatus().subscribe(
@@ -64,6 +72,8 @@ export class TimeSheetComponent implements OnInit {
     this._timesheetService.getAllTimeSheets().subscribe(
       (listTimeSheet: TimeSheet[]) => {
         this.listTimeSheet.data = listTimeSheet;
+        console.log("this.listTimeSheet.data :", this.listTimeSheet.data);
+        
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -74,7 +84,9 @@ export class TimeSheetComponent implements OnInit {
   getAllUsers(): void {
     this._userService.getAllUsers().subscribe(
       (user: User[]) => {
-        this.user = user;
+        this.users = user;
+        console.log(" this.user : ", this.users);
+        
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
