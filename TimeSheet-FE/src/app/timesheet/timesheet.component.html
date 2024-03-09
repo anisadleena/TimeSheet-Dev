@@ -1,22 +1,23 @@
 <div class="w-full h-full flex flex-col">
-    
-    <div class="flex flex-col  items-end">
+    <!-- search items -->
+    <div class="flex flex-col items-center mt-5">
+        <div class="h-full flex flex-row">
+            <div class=" border-2 border-gray-400 bg-gray-400 w-8 text-center">
+                <mat-icon class="text-black mt-2">search</mat-icon>
+            </div>
+            <input class="text-base p-2 border-2 border-gray-400 text-black" placeholder="Search By Project Name or Task Description" style="width: 500px" [formControl]="filterGlobalSearchControl">
+        </div>
+    </div>
+    <!-- add new time sheet  -->
+    <div class="flex flex-col items-center">
         <button class="bg-blue-500 hover:bg-blue-900 text-white py-1 px-6 rounded-sm m-2 text-center w-26 flex flex-row" (click)="create()">
             Create
             <mat-icon class="text-white text-sm">add</mat-icon>
         </button>
     </div>
-    <div class="flex flex-col  items-center">
-        <div class="flex flex-row text-center border-2 border-gray-200 rounded-lg mt-2 w-1/2" >
-            <div class="w-full h-full pr-4 pl-4 m-1">
-                <mat-icon>search</mat-icon>
-                <input class="text-base m-1 w-4/5" placeholder="Search" [formControl]="filterGlobalSearchControl" >
-            </div>
-        </div>
-    
-    <div class="flex border-2 border-gray-400 m-5">
+    <!-- table body -->
+    <div class="flex border-2 border-gray-400 ml-5 mr-5">
         <table mat-table [dataSource]="listTimeSheet" class="mat-elevation-z8">
-          
             <!-- Project Column -->
             <ng-container matColumnDef="project">
               <th mat-header-cell *matHeaderCellDef> Project </th>
@@ -68,6 +69,6 @@
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+        </table>
     </div>   
 </div>
