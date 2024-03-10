@@ -18,13 +18,14 @@ import { UserService } from '../services/user.service';
 import { Status, TimeSheet, User } from '../services/timesheet.type';
 import { ModalEditComponent } from './modal-edit/modal-edit.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
   
 
 @Component({
   selector: 'timesheet',
   templateUrl: 'timesheet.component.html',
   standalone: true,
-  imports: [MatIconModule, MatFormFieldModule, FormsModule, MatInputModule,CommonModule, MatButtonModule, MatTableModule, MatDialogModule,MatTooltipModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule, MatPaginatorModule],
+  imports: [MatIconModule, MatFormFieldModule, FormsModule, MatInputModule,CommonModule, MatButtonModule, MatTableModule, MatDialogModule,MatTooltipModule, MatSelectModule, MatDatepickerModule, ReactiveFormsModule, MatPaginatorModule,MatSortModule],
 })
 export class TimeSheetComponent implements OnInit {
   searchTerm: string = '';
@@ -35,6 +36,7 @@ export class TimeSheetComponent implements OnInit {
   users: User[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   listTimeSheet: MatTableDataSource<any>;
   constructor(
     public dialog: MatDialog,
@@ -55,6 +57,7 @@ export class TimeSheetComponent implements OnInit {
   ngAfterViewInit() {
     // Assuming your data is fetched and assigned to listTimeSheet
     this.listTimeSheet.paginator = this.paginator;
+    this.listTimeSheet.sort = this.sort;
 }
 
   getAllStatus(): void {
@@ -71,9 +74,7 @@ export class TimeSheetComponent implements OnInit {
   getAllTimeSheets(): void {
     this._timesheetService.getAllTimeSheets().subscribe(
       (listTimeSheet: TimeSheet[]) => {
-        this.listTimeSheet.data = listTimeSheet;
-        console.log("this.listTimeSheet.data :", this.listTimeSheet.data);
-        
+        this.listTimeSheet.data = listTimeSheet;  
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -85,8 +86,6 @@ export class TimeSheetComponent implements OnInit {
     this._userService.getAllUsers().subscribe(
       (user: User[]) => {
         this.users = user;
-        console.log(" this.user : ", this.users);
-        
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -133,9 +132,7 @@ export class TimeSheetComponent implements OnInit {
   }
 
   delete(id : string): void {
-    this._timesheetService.deleteTimeSheet(id).subscribe((response) =>{
-      console.log("response => ", response);
-      
+    this._timesheetService.deleteTimeSheet(id).subscribe(() =>{
     });
   }
 }

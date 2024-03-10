@@ -30,4 +30,14 @@ export class TimeSheetService {
   deleteTimeSheet(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
   }
+
+  // Sorting by endDate (DESC)
+  sortByEndDate(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/sortedByEndDate`);
+  }
+
+  // Sorting by startDate (DESC)
+  sortByStartDate(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/sortedByStartDate`);
+  }
 }

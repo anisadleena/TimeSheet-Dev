@@ -82,10 +82,8 @@ export class ModalCreateComponent {
       endDate: this.addForm.get('endDate')?.value,
       project: this.addForm.get('project')?.value,
     }
-    console.log("body : ", body);
 
-    this._timesheetService.addTimeSheet(body).subscribe((response) =>{
-      console.log("response : ", response);
+    this._timesheetService.addTimeSheet(body).subscribe(() =>{
       this._dialogRef.close();
     });
     

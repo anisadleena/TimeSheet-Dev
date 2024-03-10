@@ -20,10 +20,10 @@
     </div>
     <!-- table body -->
     <div class="flex border-2 border-gray-400 ml-5 mr-5">
-        <table mat-table [dataSource]="listTimeSheet" class="mat-elevation-z8">
+        <table mat-table [dataSource]="listTimeSheet" matSort class="mat-elevation-z8">
             <!-- Project Column -->
             <ng-container matColumnDef="project">
-              <th class="w-16" mat-header-cell *matHeaderCellDef> Project </th>
+              <th class="w-16" mat-header-cell *matHeaderCellDef mat-sort-header> Project </th>
               <td class="border w-16" mat-cell *matCellDef="let element"> {{element.project}} </td>
             </ng-container>
           

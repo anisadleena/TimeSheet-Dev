@@ -12,7 +12,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { StatusService } from "src/app/services/status.service";
 import { TimeSheetService } from "src/app/services/timesheet.service";
-import { Status, TimeSheet, User } from "src/app/services/timesheet.type";
+import { Status, User } from "src/app/services/timesheet.type";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -57,7 +57,6 @@ export class ModalEditComponent{
     this._statusService.getAllStatus().subscribe(
       (status: Status[]) => {
         this.status = status;
-        console.log(this.status);
       },
       (error) => {
         console.error('Error fetching statuses:', error);
@@ -69,7 +68,6 @@ export class ModalEditComponent{
     this._userService.getAllUsers().subscribe(
       (user: User[]) => {
         this.users = user;
-        console.log(this.users);
       },
       (error) => {
         console.error('Error fetching List of TimeSheet:', error);
@@ -92,15 +90,8 @@ export class ModalEditComponent{
       project: this.editForm.get('project')?.value,
     }
 
-    this._timesheetService.updateTimeSheet(this.data.id, body).subscribe((response) =>{
-      console.log("response : ", response);
+    this._timesheetService.updateTimeSheet(this.data.id, body).subscribe(() =>{
       this._dialogRef.close();
     });
   }
-
-  // private formatDate(date: DateTime) : string {
-    
-  // }
-
-  
 }
